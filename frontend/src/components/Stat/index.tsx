@@ -1,4 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useDebouncedValue } from 'rooks';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import Filters from './components/Filters';
 import StatTable from './components/StatTable';
 
 
@@ -8,16 +15,27 @@ export enum Modes {
 }
 
 const Stat = () => {
+    const [filters, setFilters] = useState<any>({});
+    const [debouncedFilters] = useDebouncedValue(filters, 1500);
    
     return (
-        <>
-            <StatTable
-                mode={Modes.SensorsStat}
-            />
-            <StatTable
-                mode={Modes.OperatorsStat}
-            />
-        </>
+        <Container>
+            <Row>
+                <Col>
+                    <Filters onChangeFilters={setFilters} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <StatTable mode={Modes.SensorsStat} filters={debouncedFilters}/>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <StatTable mode={Modes.OperatorsStat} filters={debouncedFilters}/>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

@@ -23,9 +23,10 @@ interface OperatorsStat {
 
 export interface StatTableProps {
     mode: 1 | 2;
+    filters: any;
 }
 
-const StatTable: React.FC<StatTableProps> = ({ mode }) => {
+const StatTable: React.FC<StatTableProps> = ({ mode, filters }) => {
     const [tBody, setTBody] = useState<(string | number)[][]>([])
     
     const sensorsTHead = ['Sensor Type', 'Total Tests', 'Total Success Tests', 'Total Failure Tests'];
@@ -34,8 +35,8 @@ const StatTable: React.FC<StatTableProps> = ({ mode }) => {
     useEffect(() => {
         (async () =>{
             const stat = Modes.SensorsStat === mode 
-                ? await getSensorsStat()
-                : await getOperatorsStat();
+                ? await getSensorsStat(filters)
+                : await getOperatorsStat(filters);
 
             const parsedTBody = Modes.SensorsStat === mode
                 ? parseSensorsStat(stat)
@@ -43,7 +44,7 @@ const StatTable: React.FC<StatTableProps> = ({ mode }) => {
 
             setTBody(parsedTBody);
         })()
-    }, [])
+    }, [filters])
 
     const parseSensorsStat = (stat: SensorStat[]) => 
         stat.map((sensorStat) =>
