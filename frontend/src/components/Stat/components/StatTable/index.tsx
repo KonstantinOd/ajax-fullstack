@@ -89,14 +89,13 @@ const StatTable: React.FC<StatTableProps> = ({ mode, filters }) => {
                                 thead={Modes.SensorsStat === mode ? operatorsTHead : sensorsTHead}
                                 parseTBody={Modes.SensorsStat === mode ? parseOperatorsStat : parseSensorsStat}
                                 filters={
-                                    //filter nested table data by sensor type or operator name  
-                                    Modes.SensorsStat === mode 
-                                        ? {
-                                            sensor_type: tr[0]
-                                        }
-                                        : {
-                                            operator: tr[0]
-                                        }
+                                    {
+                                        ...filters,
+                                        //filter nested table data by sensor type or operator name
+                                        ...(Modes.SensorsStat === mode
+                                                ? { sensor_type: tr[0]}
+                                                : { operator: tr[0] })
+                                    }
                                 }
                             />
                         </td>
