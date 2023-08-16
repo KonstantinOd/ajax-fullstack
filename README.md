@@ -8,7 +8,7 @@
 - Created a bootstrap table to display operators statistics and a nested table to display sensors statistics depends on operator name. 
 
 - Added filters by date in the range of no more than 2 weeks
-- Added total_tests, total_success, total_failure under the main Sensor and Operator Statisctics tables. 
+- Added total_tests, total_success, total_failure under the main Sensor and Operator Statisctics tables. (I calculated these values on the front-end side, but I think it's better to create a new api method to get total_tests, total_success and total_failure values). 
 
 
 ## Backend app
