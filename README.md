@@ -7,6 +7,9 @@
 - Created a bootstrap table to display sensors statistics and a nested table to display operators statistics depends on sensor type. 
 - Created a bootstrap table to display operators statistics and a nested table to display sensors statistics depends on operator name. 
 
+- Added filters by date in the range of no more than 2 weeks
+- Added total_tests, total_success, total_failure under the main Sensor and Operator Statisctics tables. 
+
 
 ## Backend app
 
